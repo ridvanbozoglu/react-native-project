@@ -23,10 +23,10 @@ export default function HomeScreen() {
   const ricks = useRickStore((state) => state.ricks);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.searchBarContainer}>
-        <View style={styles.listContainerMax}>
-          <View style={styles.listContainer}>
+    <SafeAreaView className="flex-[1] w-full items-center p-[20]  bg-[#ffffff]">
+      <View className="bg-gray-200 border border-gray-400 rounded-[15px]  mb-3 flex-row items-center w-[90%] p-1">
+        <View className="max-w-[80%]  border-gray-400 rounded-[15px] overflow-hidden">
+          <View className="rounded-[5px] flex-[1] max-w-full">
             <FlatList
               data={ricks ?? []}
               horizontal
@@ -37,7 +37,7 @@ export default function HomeScreen() {
           </View>
         </View>
         <TextInput
-          style={styles.textInput}
+          className="h-[40] flex-[1] rounded-[10] py-[10] mx-[5]"
           placeholder="Search for Rick..."
           value={searchValue}
           onChangeText={(text) => setSearchValue(text)}
@@ -46,7 +46,7 @@ export default function HomeScreen() {
       {isLoading && <Text>Loading...</Text>}
       {error && <Text>Error fetching data</Text>}
       {data && (
-        <View style={styles.fetchedList}>
+        <View className="w-[90%] bg-[#f8fafc] overflow-hidden border-[gray] border rounded-[15px] mb-[70px]">
           <FlatList
             data={data?.results ?? []}
             renderItem={({ item }: { item: Character }) => (
@@ -55,7 +55,9 @@ export default function HomeScreen() {
             keyExtractor={(item: Character) => item.id.toString()}
             ListEmptyComponent={
               !isLoading && !error ? (
-                <Text style={styles.emptyText}>No results found...</Text>
+                <Text className="text-center  text-[gray]">
+                  No results found...
+                </Text>
               ) : null
             }
           />
@@ -64,56 +66,3 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    paddingTop: 20,
-    backgroundColor: "#ffffff",
-  },
-  textInput: {
-    height: 40,
-    paddingHorizontal: 10,
-    flex: 1,
-    borderRadius: 10,
-    marginHorizontal: 5,
-  },
-  emptyText: {
-    textAlign: "center",
-    marginTop: 20,
-    color: "gray",
-  },
-  searchBarContainer: {
-    backgroundColor: "#f0f0f0",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 15,
-    marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    width: "90%",
-    padding: 5,
-  },
-  listContainer: {
-    borderRadius: 5,
-    flex: 1,
-    maxWidth: "100%",
-  },
-  listContainerMax: {
-    maxWidth: "80%",
-    borderColor: "gray",
-    borderRadius: 15,
-    overflow: "hidden",
-  },
-  fetchedList: {
-    width: "90%",
-    backgroundColor: "#f8fafc",
-    overflow: "hidden",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 15,
-    marginBottom: 70,
-  },
-});

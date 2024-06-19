@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import useRickStore from "@/zustand/store";
 
@@ -7,31 +7,14 @@ export default function ExitButton({ id }: { id: number }) {
 
   return (
     <TouchableOpacity
-      style={styles.buttonTouchable}
+      className="p-1"
       onPress={() => {
         removeRick(id);
       }}
     >
-      <View style={styles.button}>
-        <Text style={styles.buttonText}>X</Text>
+      <View className="bg-gray-400 rounded items-center justify-center w-[30] h-[30]">
+        <Text className="text-black">X</Text>
       </View>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonTouchable: {
-    padding: 4,
-  },
-  button: {
-    backgroundColor: "#94a3b8",
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 30,
-    height: 30,
-  },
-  buttonText: {
-    color: "#000",
-  },
-});
